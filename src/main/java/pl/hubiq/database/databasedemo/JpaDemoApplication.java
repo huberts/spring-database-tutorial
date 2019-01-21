@@ -15,28 +15,28 @@ import java.util.Date;
 @SpringBootApplication
 public class JpaDemoApplication implements CommandLineRunner {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private final PersonJpaRepository repository;
+    private final PersonJpaRepository repository;
 
-	@Autowired
-	public JpaDemoApplication(PersonJpaRepository repository) {
-		this.repository = repository;
-	}
+    @Autowired
+    public JpaDemoApplication(PersonJpaRepository repository) {
+        this.repository = repository;
+    }
 
 
-	public static void main(String[] args) {
-		SpringApplication.run(JpaDemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(JpaDemoApplication.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
-		logger.info("User with id 10001 -> {}", repository.findById(10001));
+    @Override
+    public void run(String... args) throws Exception {
+        logger.info("User with id 10001 -> {}", repository.findById(10001));
+        logger.info("Inserting -> {}", repository.insert(new Person("Tara", "Berlin", new Date())));
+        logger.info("Updating 10003 -> {}", repository.update(new Person(10003, "John", "Madrid", new Date())));
+        repository.delete(10002);
 //		logger.info("All users -> {}", dao.findAll());
 //		logger.info("Users with name Hubert -> {}", dao.findByName("Hubert"));
 //		logger.info("Users with location Waszyngton -> {}", dao.findByLocation("Waszyngton"));
-//		logger.info("Deleting 10002 -> No of rows deleted: {}", dao.deleteById(10002));
-//		logger.info("Inserting 20001 -> {}", dao.insert(new Person(20001, "Tara", "Berlin", new Date())));
-//		logger.info("Updating 10003 -> {}", dao.update(new Person(10003, "John", "Madrid", new Date())));
-	}
+    }
 }
